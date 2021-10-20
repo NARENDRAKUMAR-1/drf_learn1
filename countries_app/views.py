@@ -31,13 +31,15 @@ def countries_list(request):
         name = request.GET.get('name', None)
         if name is not None:
             coutries_var = countries_var.filter(name__icontains=name)
+            # filter
             # name__icontains  checks if either name or description field 
             # contains the value of search items
         
         countries_serializer_var = CountriesSerializer(countries_var, many=True)
         #   many=True  serialize each if queryset contains multiple items
+
         return JsonResponse(countries_serializer_var.data, safe=False )
-        # safe=False  any object can be passed for serialization
+        # safe=False  any object can be passed for serialization as of now  
 
     
     elif request.method == 'POST':
@@ -53,11 +55,15 @@ def countries_list(request):
 
 
 # others
-
+# decorator
+# put-update
 @api_view(['GET', 'PUT', 'DELETE'])
 
 def countries_detail(request, pk):
-    #  here this pk is thew id columkn
+    #  here this pk is the id columkn primary key
+
+    # we will request everything as per the primary key
+    #  so we want to make sure that the key is legit
 
     try: # to check
         countries_var = Countries.objects.get(pk=pk)

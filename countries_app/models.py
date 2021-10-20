@@ -16,5 +16,5 @@ class Countries(models.Model):
         return self.name
 
     class Meta:
-        # Meta is the inner class which adds us in ordering the data when an query is made
+        # Meta is the inner class which helps us in ordering the data when an query is made
         ordering=('id', )
